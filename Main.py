@@ -16,7 +16,6 @@ class CustomClient(fbchat.Client):
     
 	def onMessage(self,mid,author_id,message_object,thread_id,thread_type,ts,metadata,msg,**kwargs):
 		pass
-  
 
 
 client = CustomClient("botymcbotface808@gmail.com","[Password]")
