@@ -1,4 +1,72 @@
 import fbchat
+from random import randint
+
+def nameMake(n=3,m=4):
+    alpha = 'abcdefghijklmnopqrstuvwxyz'
+    vowels = 'aeiouy'
+    consts = 'bcdfghjklmnpqrstvwxz'
+    name = ''
+    a = randint(1,n)
+    for i in range(0,a):
+        name += choice(alpha)
+        name += choice(vowels)
+        name += choice(consts)
+    name += ' '
+    b = randint(1,m)
+    for i in range(0,b):
+        name += choice(alpha)
+        name += choice(vowels)
+        name += choice(consts)
+
+    return name.title()
+
+
+class Game(object):
+
+	class stats(object):
+		def __init__(self,s,d,c,i,w,c):
+			self.str,self.dex,self.con,self.int,self.wis,self.cha = s,d,c,i,w,c
+	
+	class Player(object):
+		def __init__(self):
+			pass
+	
+	class Enemy(object):
+		def __init__(self,lev):
+			self.name = nameMake()
+			self.level = lev
+			self.stats = stats(randint(1,lev)+3,randint(1,lev)+1,randint(1,lev)+2,randint(1,lev)-1,randint(1,lev)-2,randint(1,lev)-3)
+
+	class Map(object):
+		
+		class vector(object):
+			def __init__(self,i,j):
+				self.i = i
+				self.j = j
+
+		class City(object):
+
+			class Quest(object):
+				def __init__(self,lev):
+					self.level = lev
+					self.enemies = [Game.Enemy(self.level-i) for i in range(self.level)][::-1]
+					self.name = "Kill "+str(self.enemies[-1].name)
+					self.desc = "Kill "+str(self.enemies[-1].name)+" and co; reward: "+str(self.level*10)+" G."
+
+
+
+
+			def __init__(self):
+				self.name = nameMake()
+				self.position = vector(randint(1,50),randint(1,50))
+				self.quests = list()
+
+
+
+		def __init__(self):
+			self.name = "The Fbchat RPG Game"
+			self.places = list()
+
 
 class CustomClient(fbchat.Client):
 	def getAuthor(self,author_id):
