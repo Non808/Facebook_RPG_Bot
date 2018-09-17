@@ -24,19 +24,31 @@ def nameMake(n=3,m=4):
 class Game(object):
 
 	class stats(object):
-		def __init__(self,s,d,c,i,w,c):
-			self.str,self.dex,self.con,self.int,self.wis,self.cha = s,d,c,i,w,c
+		def __init__(self,s,d,c,i):
+			self.str,self.dex,self.con,self.int = s,d,c,i
 	
 	class Player(object):
 		def __init__(self):
 			pass
 	
 	class Enemy(object):
-		def __init__(self,lev):
+		def __init__(self,lev,typ,boss=False,wep=None,arm=None):
+			self.type = typ
+			self.boss = boss
 			self.name = nameMake()
 			self.level = lev
-			self.stats = stats(randint(1,lev)+3,randint(1,lev)+1,randint(1,lev)+2,randint(1,lev)-1,randint(1,lev)-2,randint(1,lev)-3)
-
+			self.stats = stats(randint(-lev+3,lev)+3,randint(-lev+1,lev)+1,randint(1,lev)+2,randint(-lev,lev)-1)
+			self.HP = self.level*self.stats.con+self.level
+			self.weapon = wep
+			self.armour = arm
+			if self.boss:
+				self.title = str(self.name)+", King of the "+str(self.type)+"s."
+			else:
+				self.title = str(self.name)+" a "+str(self.type)+"."
+				
+		#def attack_close(self,target,
+			
+			
 	class Map(object):
 		
 		class vector(object):
@@ -50,8 +62,8 @@ class Game(object):
 				def __init__(self,lev):
 					self.level = lev
 					self.enemies = [Game.Enemy(self.level-i) for i in range(self.level)][::-1]
-					self.name = "Kill "+str(self.enemies[-1].name)
-					self.desc = "Kill "+str(self.enemies[-1].name)+" and co; reward: "+str(self.level*10)+" G."
+					self.name = "Kill "+str(self.enemies[-1].title)
+					self.desc = "Kill "+str(self.enemies[-1].title)+" and co; reward: "+str(self.level*10)+" G."
 
 
 
