@@ -1,3 +1,5 @@
+print("This shouldn't be here")
+
 import fbchat
 from random import randint
 
