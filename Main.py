@@ -62,9 +62,9 @@ class Game(object):
 				def __init__(self,lev):
 					self.level = lev
 					self.enemies = [Game.Enemy(self.level-i) for i in range(self.level)][::-1]
-					self.name = "Kill "+str(self.enemies[-1].title)
+					self.name = "Kill "+str(self.enemies[-1].title)+" (Level "+str(self.level)+")."
 					self.desc = "Kill "+str(self.enemies[-1].title)+" and co; reward: "+str(self.level*10)+" G."
-
+				
 
 
 
